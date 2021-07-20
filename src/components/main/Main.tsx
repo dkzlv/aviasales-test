@@ -45,34 +45,28 @@ const Main = () => {
   // Initializing search
   useEffect(startSearch, [startSearch]);
   // Getting the tickets
-  useEffect(
-    () => {
-      if (!searchId) return;
+  useEffect(() => {
+    if (!searchId) return;
 
-      const run = async () => {
-        let showMustGoOn = true,
-          innerTickets = tickets;
+    const run = async () => {
+      let showMustGoOn = true;
 
-        while (showMustGoOn) {
-          const { json } = await getTickets(searchId);
+      while (showMustGoOn) {
+        const { json } = await getTickets(searchId);
 
-          // Escaping the function when searchId has changed.
-          // It's ok to send a request above, but not ok to save the result to the state.
-          if (searchId !== currSearchIdRef.current) {
-            return;
-          }
-
-          showMustGoOn = !json.stop;
-          innerTickets = [...innerTickets, ...json.tickets];
-          setTickets(innerTickets);
+        // Escaping the function when searchId has changed.
+        // It's ok to send a request above, but not ok to save the result to the state.
+        if (searchId !== currSearchIdRef.current) {
+          return;
         }
-        setIsLoading(false);
-      };
-      run();
-    },
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-    [searchId]
-  );
+
+        showMustGoOn = !json.stop;
+        setTickets((oldTickets) => [...oldTickets, ...json.tickets]);
+      }
+      setIsLoading(false);
+    };
+    run();
+  }, [searchId]);
 
   return (
     <div className={styles.container}>
