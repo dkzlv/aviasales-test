@@ -1,12 +1,14 @@
-import { useMemo, useState, useCallback } from 'react';
+import { useMemo, useState, useCallback, useEffect } from 'react';
 import { useTranslation } from 'react-i18next';
 import { addMinutes } from 'date-fns';
 
 import styles from './TicketList.module.scss';
 import { Filter, filterTickets, Ticket } from 'services/search';
+
+import { ReactComponent as SadSvg } from 'teenyicons/solid/mood-sad.svg';
 import TicketItem from 'components/tickets/ticketItem/TicketItem';
 import Button from 'components/elements/button/Button';
-import { useEffect } from 'react';
+import BlockOverlay from 'components/elements/blockOverlay/BlockOverlay';
 
 const countStep = 5;
 // Preventing from showing 3:5 and showing 03:05 instead.
@@ -14,10 +16,12 @@ const padLeft = (val: number) => (val >= 10 ? val : '0' + val);
 const getClock = (dt: Date) => `${padLeft(dt.getHours())}:${padLeft(dt.getMinutes())}`;
 
 const TicketList = ({
+  isLoading,
   tickets,
   type,
   stops,
 }: {
+  isLoading: boolean;
   tickets: Ticket[];
 } & Filter) => {
   const { t, i18n } = useTranslation();
@@ -62,8 +66,18 @@ const TicketList = ({
     return diff >= countStep ? countStep : diff;
   }, [tickets.length, showCount]);
 
+  // I am most sure this state is purely theoretical in this test. Still better have it.
+  const showOverlay = useMemo(() => {
+    return !isLoading && !filteredSortedTickets.length;
+  }, [isLoading, filteredSortedTickets.length]);
+
   return (
     <>
+      <BlockOverlay
+        show={showOverlay}
+        text={t('zeroData.zero')}
+        icon={<SadSvg className={styles.loadingIcon} />}
+      />
       <ol className={styles.list}>
         {ticketsToShow.map((ticket, i) => (
           <li key={i}>

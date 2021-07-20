@@ -1,4 +1,4 @@
-import { useState, useEffect, useCallback, useRef } from 'react';
+import { useState, useEffect, useCallback, useRef, useMemo } from 'react';
 import { useTranslation } from 'react-i18next';
 
 import styles from './Main.module.scss';
@@ -68,6 +68,23 @@ const Main = () => {
     run();
   }, [searchId]);
 
+  const overlayData = useMemo<{
+    text: string;
+    icon: React.ReactNode;
+  } | null>(() => {
+    if (isError)
+      return {
+        text: t('zeroData.error'),
+        icon: <ErrorSvg className={styles.errorIcon} />,
+      };
+    if (isLoading && !tickets.length)
+      return {
+        text: t('zeroData.loading'),
+        icon: <LoaderSvg className={styles.loadingIcon} />,
+      };
+    return null;
+  }, [isError, isLoading, tickets.length, t]);
+
   return (
     <div className={styles.container}>
       <div className={styles.logo} onClick={startSearch}>
@@ -82,17 +99,11 @@ const Main = () => {
           <TicketType type={type} setType={setType} />
           <div className={styles.ticketList}>
             <BlockOverlay
-              show={isError || !tickets.length}
-              text={isError ? t('zeroData.error') : t('zeroData.loading')}
-              icon={
-                isError ? (
-                  <ErrorSvg className={styles.errorIcon} />
-                ) : (
-                  <LoaderSvg className={styles.loadingIcon} color='hotpink' />
-                )
-              }
+              show={overlayData !== null}
+              text={overlayData?.text}
+              icon={overlayData?.icon}
             />
-            <TicketList tickets={tickets} stops={stops} type={type} />
+            <TicketList isLoading={isLoading} tickets={tickets} stops={stops} type={type} />
           </div>
         </div>
       </main>
