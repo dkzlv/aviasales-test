@@ -1,0 +1,47 @@
+$bg-color-value: #f3f7fa;
+$text-color-value: #4a4a4a;
+$box-bg-color-value: #fff;
+
+$accent-color-value: #2196f3;
+$accent-color-light-value: #9abbce;
+$accent-color-dimmed-value: change-color($accent-color-value, $alpha: 0.25);
+$accent-color-border-light-value: #dfe5ec;
+
+$error-color-value: rgb(221, 3, 3);
+
+$base-font-size: 12px;
+$semi-bold-weight-value: 600;
+
+$main-gap-value: 20px;
+
+$block-border-radius-value: 5px;
+
+/// Vars to interpolate
+
+$bg-color: var(--bg-color);
+$text-color: var(--text-color);
+$box-bg-color: var(--box-bg-color);
+
+$accent-color: var(--accent-color);
+$accent-color-light: var(--accent-color-light);
+$accent-color-dimmed: var(--accent-color-dimmed);
+$accent-color-border-light: var(--accent-color-border-light);
+
+$error-color: var(--error-color);
+
+$semi-bold-weight: var(--semi-bold-weight);
+
+$main-gap: var(--main-gap);
+
+$block-border-radius: var(--block-border-radius);
+
+$base-tablet: 729px;
+$tablet: $base-tablet + (2 * $main-gap-value);
+$base-desktop: 960px;
+$desktop: $base-desktop + (2 * $main-gap-value);
+
+$mq-breakpoints: (
+  tablet: $tablet,
+  desktop: $desktop,
+);
+@import '~sass-mq/mq';

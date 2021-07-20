@@ -1,0 +1,66 @@
+@import 'variables.scss';
+
+.container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  margin: 50px 0;
+}
+
+.logo {
+  margin-bottom: 50px;
+}
+
+.main {
+  width: 100%;
+
+  @include mq($until: tablet) {
+    padding: 0 $main-gap;
+  }
+  @include mq($from: tablet) {
+    display: flex;
+    max-width: $base-tablet;
+  }
+  @include mq($from: desktop) {
+    max-width: $base-desktop;
+  }
+}
+
+.aside {
+  margin-bottom: $main-gap;
+
+  @include mq($from: tablet) {
+    width: 25%;
+    margin-right: $main-gap;
+  }
+}
+
+.ticketColumn {
+  flex-grow: 3;
+
+  display: flex;
+  flex-direction: column;
+
+  > :not(:last-child) {
+    margin-bottom: $main-gap;
+  }
+}
+
+.ticketList {
+  position: relative;
+}
+
+@keyframes loading {
+  50% {
+    transform: rotate(360deg);
+  }
+}
+.loadingIcon {
+  color: $accent-color;
+  animation: loading 2s ease-in-out infinite;
+}
+
+.errorIcon {
+  color: $error-color;
+}

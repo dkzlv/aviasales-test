@@ -1,0 +1,34 @@
+@import '~minireset.css/minireset.sass';
+@import 'variables.scss';
+
+html {
+  min-width: 300px;
+
+  font-family: 'Open Sans', sans-serif;
+  font-size: $base-font-size;
+
+  background-color: $bg-color;
+  color: $text-color;
+
+  text-rendering: optimizeLegibility;
+  -moz-osx-font-smoothing: grayscale;
+  -webkit-font-smoothing: antialiased;
+}
+
+:root {
+  --bg-color: #{$bg-color-value};
+  --text-color: #{$text-color-value};
+  --box-bg-color: #{$box-bg-color-value};
+
+  --accent-color: #{$accent-color-value};
+  --accent-color-light: #{$accent-color-light-value};
+  --accent-color-dimmed: #{$accent-color-dimmed-value};
+  --accent-color-border-light: #{$accent-color-border-light-value};
+
+  --error-color: #{$error-color-value};
+
+  --semi-bold-weight: #{$semi-bold-weight-value};
+
+  --main-gap: #{$main-gap-value};
+  --block-border-radius: #{$block-border-radius-value};
+}

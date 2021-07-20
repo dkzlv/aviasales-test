@@ -1,0 +1,60 @@
+@import 'variables.scss';
+
+/**
+How we handle double borders and mobiles:
+{1} — enabling flex-wrap so it looks sleek on mobile
+{3} — border-radius for the container only
+{4} — setting borders for both container and each items. We also set hidden overflow, so that…
+{5} — … we can set negative margins for the items. This way we don't have double borders both
+between the container and the item and between items as well.
+{2} — set negative margins for the container to compensate for the positional change introduced
+by negative margins on the items.
+*/
+$border-width: 1px;
+
+.tabs {
+  position: relative;
+  display: flex;
+
+  flex-wrap: wrap; // {1}
+  margin: $border-width * -1; // {2}
+  border-radius: $block-border-radius-value; // {3}
+
+  list-style: none;
+
+  input {
+    position: absolute;
+    opacity: 0;
+    height: 0;
+    width: 0;
+
+    &:checked + .text {
+      color: $box-bg-color;
+      background-color: $accent-color;
+      border-color: $accent-color;
+    }
+  }
+}
+
+// 4
+.tabs,
+.item {
+  border: $border-width solid $accent-color-border-light;
+  overflow: hidden;
+}
+
+.item {
+  flex-grow: 1;
+  margin: $border-width * -1; // {5}
+}
+
+.label {
+  cursor: pointer;
+}
+
+.text {
+  display: block;
+  padding: 15px;
+  text-align: center;
+  background: $box-bg-color;
+}

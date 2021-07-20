@@ -1,0 +1,35 @@
+@import 'variables';
+
+.wrapper {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  right: 0;
+  left: 0;
+
+  background-color: $bg-color;
+}
+
+@keyframes fadeOut {
+  to {
+    opacity: 0;
+  }
+}
+.hidden {
+  animation: fadeOut 0.5s ease-out;
+}
+
+.content {
+  display: flex;
+  flex-direction: column;
+  place-content: center;
+  place-items: center;
+
+  margin-top: 5em;
+
+  svg {
+    width: 50px;
+    height: 50px;
+    margin-bottom: 2em;
+  }
+}

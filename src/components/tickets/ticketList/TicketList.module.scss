@@ -1,0 +1,14 @@
+@import 'variables.scss';
+
+.list {
+  list-style: none;
+
+  > *:not(:last-child) {
+    margin-bottom: $main-gap;
+  }
+}
+
+.button {
+  width: 100%;
+  margin-top: $main-gap;
+}

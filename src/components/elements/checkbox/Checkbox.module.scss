@@ -1,0 +1,43 @@
+@import 'variables.scss';
+
+$size: 20px;
+
+.label {
+  position: relative;
+  display: flex;
+  align-items: center;
+
+  cursor: pointer;
+
+  input {
+    position: absolute;
+    opacity: 0;
+    height: 0;
+    width: 0;
+
+    &:focus ~ .check {
+      outline: 3px solid $accent-color-dimmed;
+    }
+
+    &:checked ~ .check {
+      border-color: $accent-color;
+    }
+  }
+}
+
+.check {
+  display: flex;
+  place-items: center;
+  place-content: center;
+
+  height: $size;
+  width: $size;
+  margin-right: $size / 2;
+
+  border-radius: 2px;
+  border: 1px solid $accent-color-light;
+}
+
+.text {
+  flex: 1;
+}

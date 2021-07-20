@@ -1,0 +1,22 @@
+@import 'variables';
+
+.button {
+  padding: 15px $main-gap;
+  border: 2px solid $accent-color;
+  border-radius: $block-border-radius;
+
+  text-align: center;
+
+  background-color: $accent-color;
+  color: $box-bg-color;
+
+  transition-property: color, background-color;
+  transition-timing-function: ease-in-out;
+  transition-duration: 0.15s;
+  cursor: pointer;
+
+  &:hover {
+    background-color: transparent;
+    color: $accent-color;
+  }
+}

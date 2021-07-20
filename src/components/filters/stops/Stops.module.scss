@@ -1,0 +1,17 @@
+@import 'variables';
+
+.row {
+  display: block;
+  padding: calc(#{$main-gap} / 2) $main-gap;
+}
+
+.rowWrapper {
+  padding: calc(#{$main-gap} / 2) 0;
+}
+
+.hoverable {
+  font-size: 1.083rem;
+  &:hover {
+    background-color: #f1fcff;
+  }
+}

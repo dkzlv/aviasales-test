@@ -1,0 +1,43 @@
+{
+  "name": "salo1",
+  "version": "0.1.0",
+  "private": true,
+  "dependencies": {
+    "@testing-library/jest-dom": "^5.11.4",
+    "@testing-library/react": "^11.1.0",
+    "@testing-library/user-event": "^12.1.10",
+    "@types/jest": "^26.0.15",
+    "@types/node": "^12.0.0",
+    "@types/react": "^17.0.0",
+    "@types/react-dom": "^17.0.0",
+    "date-fns": "^2.22.1",
+    "i18next": "^20.3.3",
+    "minireset.css": "^0.0.7",
+    "react": "^17.0.2",
+    "react-dom": "^17.0.2",
+    "react-i18next": "^11.11.2",
+    "react-scripts": "4.0.3",
+    "teenyicons": "^0.4.1",
+    "typescript": "^4.1.2"
+  },
+  "scripts": {
+    "start": "react-scripts start",
+    "build": "react-scripts build",
+    "eject": "react-scripts eject"
+  },
+  "eslintConfig": {
+    "extends": [
+      "react-app",
+      "react-app/jest"
+    ],
+    "rules": {
+      "@typescript-eslint/no-use-before-define": 0
+    }
+  },
+  "proxy": "https://front-test.beta.aviasales.ru/",
+  "browserslist": "last 1 chrome version",
+  "devDependencies": {
+    "node-sass": "^5.0.0",
+    "sass-mq": "^5.0.1"
+  }
+}
