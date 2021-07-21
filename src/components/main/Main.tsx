@@ -1,4 +1,4 @@
-import { useState, useEffect, useCallback, useRef, useMemo } from 'react';
+import { useState, useEffect, useCallback, useMemo } from 'react';
 import { useTranslation } from 'react-i18next';
 
 import styles from './Main.module.scss';
@@ -20,7 +20,6 @@ const Main = () => {
     [isError, setIsError] = useState(false);
 
   const [searchId, setSearchId] = useState<string | null>(null),
-    currSearchIdRef = useRef(''),
     [tickets, setTickets] = useState<Ticket[]>([]);
 
   const [stops, setStops] = useState<Filter['stops']>(null),
@@ -34,7 +33,6 @@ const Main = () => {
       .then((res) => {
         const { searchId } = res.json;
         setSearchId(searchId);
-        currSearchIdRef.current = searchId;
       })
       .catch(() => {
         setIsError(true);
@@ -47,6 +45,7 @@ const Main = () => {
   // Getting the tickets
   useEffect(() => {
     if (!searchId) return;
+    let searchIdChanged = false;
 
     const run = async () => {
       let showMustGoOn = true;
@@ -54,11 +53,7 @@ const Main = () => {
       while (showMustGoOn) {
         const { json } = await getTickets(searchId);
 
-        // Escaping the function when searchId has changed.
-        // It's ok to send a request above, but not ok to save the result to the state.
-        if (searchId !== currSearchIdRef.current) {
-          return;
-        }
+        if (searchIdChanged) return;
 
         showMustGoOn = !json.stop;
         setTickets((oldTickets) => [...oldTickets, ...json.tickets]);
@@ -66,6 +61,10 @@ const Main = () => {
       setIsLoading(false);
     };
     run();
+
+    return () => {
+      searchIdChanged = true;
+    };
   }, [searchId]);
 
   const overlayData = useMemo<{

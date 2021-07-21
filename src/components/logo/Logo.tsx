@@ -14,7 +14,7 @@ const Logo = ({ loading }: { loading: boolean }) => {
   }, []);
 
   const handleAnimationEnd = useCallback(() => setClasses(loading), [loading, setClasses]);
-  useEffect(() => setClasses(loading), [setClasses, loading]);
+  useEffect(handleAnimationEnd, [handleAnimationEnd]);
 
   return <PlaneSvg ref={svg} onAnimationEnd={handleAnimationEnd} />;
 };

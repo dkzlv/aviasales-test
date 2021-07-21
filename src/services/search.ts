@@ -1,4 +1,5 @@
 import { addMinutes } from 'date-fns';
+import { nanoid } from 'nanoid';
 import { HttpError, Methods, request } from './request';
 
 export const getSearchId = () => request<{ searchId: string }>(Methods.get, 'search');
@@ -30,6 +31,7 @@ export const getTickets = async (searchId: string) => {
     const tickets: Ticket[] = json.tickets.map((ticket) => ({
       ...ticket,
       totalDuration: getTotalDuration(ticket),
+      id: nanoid(),
     }));
 
     return {
@@ -140,6 +142,8 @@ export type Ticket = TicketApi & {
   // Calculated field based on the start date of the first segment and start date + duration
   // of the last one
   totalDuration: number;
+
+  id: string;
 };
 export type Segment = {
   // Код города (iata)

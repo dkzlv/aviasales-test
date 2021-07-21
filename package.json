@@ -13,6 +13,7 @@
     "date-fns": "^2.22.1",
     "i18next": "^20.3.3",
     "minireset.css": "^0.0.7",
+    "nanoid": "^3.1.23",
     "react": "^17.0.2",
     "react-dom": "^17.0.2",
     "react-i18next": "^11.11.2",

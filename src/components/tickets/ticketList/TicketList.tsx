@@ -79,8 +79,8 @@ const TicketList = ({
         icon={<SadSvg className={styles.loadingIcon} />}
       />
       <ol className={styles.list}>
-        {ticketsToShow.map((ticket, i) => (
-          <li key={i}>
+        {ticketsToShow.map((ticket) => (
+          <li key={ticket.id}>
             <TicketItem
               ticket={ticket}
               currencyFormatter={currencyFormatter}
